@@ -2,7 +2,6 @@
 
 namespace Spatie\Blender\Model\Traits;
 
-use App\Models\Enums\TagType;
 use App\Models\Tag;
 use Illuminate\Database\Eloquent\Collection;
 
