@@ -2,9 +2,9 @@
 
 namespace Spatie\Blender\Model\Traits;
 
-use Illuminate\Database\Eloquent\Builder;
-use App\Scopes\NonDraftScope;
 use Carbon\Carbon;
+use App\Scopes\NonDraftScope;
+use Illuminate\Database\Eloquent\Builder;
 
 trait Draftable
 {
