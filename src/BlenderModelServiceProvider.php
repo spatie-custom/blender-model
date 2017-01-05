@@ -2,9 +2,9 @@
 
 namespace Spatie\Blender\Model;
 
+use Spatie\MediaLibrary\Media;
 use Illuminate\Support\ServiceProvider;
 use Spatie\Blender\Model\Scopes\NonDraftMediaScope;
-use Spatie\MediaLibrary\Media;
 
 class BlenderModelServiceProvider extends ServiceProvider
 {
