@@ -5,7 +5,6 @@ namespace Spatie\Blender\Model;
 use ReflectionClass;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
-use Spatie\EloquentSortable\Sortable;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
