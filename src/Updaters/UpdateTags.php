@@ -3,12 +3,12 @@
 namespace Spatie\Blender\Model\Updaters;
 
 use App\Models\Tag;
+use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Http\FormRequest;
 
 trait UpdateTags
 {
-    public function updateTags(Model $model, FormRequest $request)
+    public function updateTags(Model $model, Request $request)
     {
         $model->tags()->detach();
 

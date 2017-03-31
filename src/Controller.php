@@ -3,11 +3,12 @@
 namespace Spatie\Blender\Model;
 
 use ReflectionClass;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Foundation\Http\FormRequest;
 use Spatie\Blender\Model\Scopes\NonDraftScope;
 use Illuminate\Database\Eloquent\Model as Eloquent;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 
 abstract class Controller
 {
@@ -17,6 +18,8 @@ abstract class Controller
     use Updaters\UpdateSeoValues;
     use Updaters\UpdateTags;
     use Updaters\UpdateTranslations;
+
+    use ValidatesRequests;
 
     /** @var string */
     protected $modelClass, $moduleName;
@@ -58,11 +61,9 @@ abstract class Controller
             ->with('module', $this->moduleName);
     }
 
-    public function update(int $id)
+    public function update(Request $request, int $id)
     {
-        $formRequest = $this->determineUpdateRequestClass();
-
-        $request = app()->make($formRequest);
+        $this->validate($request, $this->validationRules());
 
         $model = $this->find($id);
 
@@ -125,16 +126,7 @@ abstract class Controller
         return lcfirst(str_replace_last('Controller', '', class_basename($this)));
     }
 
-    protected function determineUpdateRequestClass(): string
-    {
-        return (new ReflectionClass($this))
-            ->getMethod('updateFromRequest')
-            ->getParameters()[1]
-            ->getClass()
-            ->getName();
-    }
-
-    protected function updateModel(Eloquent $model, FormRequest $request)
+    protected function updateModel(Eloquent $model, Request $request)
     {
         $this->updateTranslations($model, $request);
         $this->updateMedia($model, $request);
@@ -145,7 +137,7 @@ abstract class Controller
         $model->save();
     }
 
-    protected function updateFields(Eloquent $model, FormRequest $request, array $fields)
+    protected function updateFields(Eloquent $model, Request $request, array $fields)
     {
         collect($fields)->each(function ($field) use ($model, $request) {
             $model->$field = $request->get($field, false);
