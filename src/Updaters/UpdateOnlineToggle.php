@@ -2,12 +2,12 @@
 
 namespace Spatie\Blender\Model\Updaters;
 
+use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Http\FormRequest;
 
 trait UpdateOnlineToggle
 {
-    protected function updateOnlineToggle(Model $model, FormRequest $request)
+    protected function updateOnlineToggle(Model $model, Request $request)
     {
         $model->online = $request->get('online') ?? false;
     }

@@ -3,14 +3,14 @@
 namespace Spatie\Blender\Model\Updaters;
 
 use Spatie\Regex\Regex;
+use Illuminate\Http\Request;
 use Spatie\Regex\MatchResult;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Http\FormRequest;
 
 trait UpdateSeoValues
 {
-    protected function updateSeoValues(Model $model, FormRequest $request)
+    protected function updateSeoValues(Model $model, Request $request)
     {
         collect($request->all())
             ->filter(function ($value, $fieldName) {

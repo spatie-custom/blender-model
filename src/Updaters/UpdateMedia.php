@@ -2,13 +2,13 @@
 
 namespace Spatie\Blender\Model\Updaters;
 
+use Illuminate\Http\Request;
 use Spatie\MediaLibrary\Media;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Http\FormRequest;
 
 trait UpdateMedia
 {
-    protected function updateMedia(Model $model, FormRequest $request)
+    protected function updateMedia(Model $model, Request $request)
     {
         foreach ($model->mediaLibraryCollections() as $collection) {
             if (! $request->has($collection)) {
