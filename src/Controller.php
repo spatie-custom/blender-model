@@ -12,14 +12,13 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 
 abstract class Controller
 {
+    use ValidatesRequests;
     use Updaters\UpdateMedia;
     use Updaters\UpdateOnlineToggle;
     use Updaters\UpdateDates;
     use Updaters\UpdateSeoValues;
     use Updaters\UpdateTags;
     use Updaters\UpdateTranslations;
-
-    use ValidatesRequests;
 
     /** @var string */
     protected $modelClass, $moduleName;
